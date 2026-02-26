@@ -10,10 +10,16 @@ st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
 # ======================
 # LOAD DATA
 # ======================
+import os
+
 @st.cache_data
 def load_data():
-    df = pd.read_csv("main_data.csv")
+    base_path = os.path.dirname(__file__)  # ambil folder dashboard.py
+    file_path = os.path.join(base_path, "main_data.csv")
+    
+    df = pd.read_csv(file_path)
     df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'])
+    
     return df
 
 df = load_data()
@@ -163,4 +169,5 @@ with tab2:
     """)
 
 st.markdown("---")
+
 st.caption("Submission Project – Dicoding Data Analysis | Shyfa Salsabila")
